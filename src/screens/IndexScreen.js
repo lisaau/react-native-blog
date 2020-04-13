@@ -7,6 +7,13 @@ const IndexScreen = ({ navigation }) => {
   const { state, addBlogPost, deleteBlogPost } = useContext(BlogContext);
 
   return <View>
+    <TouchableOpacity onPress={() => navigation.navigate('Create')}>
+      <View style={styles.addPost}>
+        <Text style={{padding: 5}}>Add New Post</Text>
+        <Feather name="plus" style={styles.icon} />
+      </View>
+    </TouchableOpacity>
+
     <Button title='Add Post' onPress={addBlogPost} />
     <FlatList
       data={state}
@@ -39,6 +46,12 @@ const styles = StyleSheet.create({
   },
   icon: {
     fontSize: 24
+  },
+  addPost: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    margin: 10,
+    borderWidth: 1
   }
 });
 
