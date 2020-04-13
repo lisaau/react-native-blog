@@ -1,8 +1,11 @@
 import createDataContext from './createDataContext';
+import jsonServer from '../api/jsonServer';
 
 // create reducer
 const blogReducer = (state, action) => {
     switch(action.type) {
+        case 'get_blogposts':
+            return action.payload;
         case 'edit_blogpost':
             return state.map((blogPost) => {
                 return blogPost.id === action.payload.id 
@@ -24,6 +27,13 @@ const blogReducer = (state, action) => {
             return state;
     }
 };
+
+const getBlogPosts = dispatch => {
+    return async () => {
+        const response = await jsonServer.get('/blogposts');
+        dispatch({ type: 'get_blogposts', payload: response.data });
+    }
+}
 
 // function that will dispatch an action that's going to modify the reducer
 const addBlogPost = dispatch => {
@@ -53,6 +63,6 @@ const editBlogPost = dispatch => {
 // get Context and Provider that will make dat available to other parts of app
 export const { Context, Provider } = createDataContext(
     blogReducer, 
-    { addBlogPost, deleteBlogPost, editBlogPost },
-    [{ title: 'TEST POST', content: 'TEST CONTENT', id: 1}]
+    { addBlogPost, deleteBlogPost, editBlogPost, getBlogPosts },
+    []
 );
