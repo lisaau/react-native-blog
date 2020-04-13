@@ -18,8 +18,8 @@ const ShowScreen = ({ navigation }) => {
                     <EvilIcons name="pencil" style={styles.icon} />
                 </View>
             </TouchableOpacity>
-            <Text>{blogPost.title}</Text>
-            <Text>{blogPost.content}</Text>
+            <Text style={styles.title}>{blogPost.title}</Text>
+            <Text style={styles.content}>{blogPost.content}</Text>
         </View>
     );
 };
@@ -33,7 +33,16 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         margin: 10,
         borderWidth: 1
-      }
+    },
+    title: {
+        fontWeight: 'bold',
+        fontSize: 20,
+        padding: 20,
+        alignSelf: 'center'
+    },
+    content: {
+        margin: 10 
+    }
 });
 
 export default ShowScreen;
