@@ -10,7 +10,9 @@ const ShowScreen = ({ navigation }) => {
 
     return (
         <View>
-            <TouchableOpacity onPress={() => navigation.navigate('Edit')}>
+            <TouchableOpacity 
+                onPress={() => navigation.navigate('Edit', { id: navigation.getParam('id')})}
+            >
                 <View style={styles.editPost}>
                     <Text style={{padding: 5}}>Edit Post</Text>
                     <EvilIcons name="pencil" style={styles.icon} />
