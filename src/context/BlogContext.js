@@ -21,8 +21,9 @@ const blogReducer = (state, action) => {
 
 // function that will dispatch an action that's going to modify the reducer
 const addBlogPost = dispatch => {
-    return (title, content) => {
+    return (title, content, callback) => {
         dispatch({ type: 'add_blogpost', payload: { title, content } });
+        callback();
     };
 };
 
