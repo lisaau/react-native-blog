@@ -14,6 +14,11 @@ const blogReducer = (state, action) => {
             })
         case 'delete_blogpost':
             return state.filter(blogpost => blogpost.id !== action.payload);
+        /*
+        don't need add_blogpost if not using dispatch in addBlogPost
+        since the callback will navigate back to IndexScreen and in that screen
+        we re-render the posts/refresh the page
+
         case 'add_blogpost':
             return [
                 ...state, 
@@ -23,6 +28,8 @@ const blogReducer = (state, action) => {
                     content: action.payload.content
                 }
             ];
+        */
+
         default:
             return state;
     }
@@ -47,7 +54,8 @@ const addBlogPost = dispatch => {
 };
 
 const deleteBlogPost = dispatch => {
-    return (id) => {
+    return async id => {
+        await jsonServer.delete(`/blogposts/${id}`)
         dispatch({ type: 'delete_blogpost', payload: id })
     };
 }
