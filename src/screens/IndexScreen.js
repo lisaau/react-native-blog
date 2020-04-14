@@ -8,6 +8,16 @@ const IndexScreen = ({ navigation }) => {
 
   useEffect(() => {
     getBlogPosts();
+
+    // getBlogPosts when we go to IndexScreen
+    const listener = navigation.addListener('didFocus', () => {
+      getBlogPosts();
+    });
+
+    // return if instance of IndexScreen goes away. Turn off any listeners we created
+    return () => {
+      listener.remove();
+    }
   }, [])
 
   return <View>
